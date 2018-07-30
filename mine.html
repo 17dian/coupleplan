@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,
+  minimum-scale=1,user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="./base.css">
+  <link rel="stylesheet" type="text/css" href="./css/mine.css">
+</head>
+
+<body>
+  <div class="status">Couple Plan</div>
+  <div >
+  <div class="list-title">工作学习</div>
+    <div id="work-box">
+      <ul id="work-list"></ul>
+      <input id="work" class="input" type="text" name="">
+    </div>
+  </div>
+  
+  <div >
+  <div  class="list-title">健康运动</div>
+    <div id="health-box">
+      <ul id="health-list"></ul>
+      <input  id = "health" class="input"  type="text" name="">
+    </div>
+  </div>
+   <div  class="list-title">休闲放松</div>
+    <div id="relax-box">
+      <ul id="relax-list"></ul>
+      <input  id = "relax" class="input"  type="text" name="">
+    </div>
+  </div>
+  <div  class="list-title">其他</div>
+    <div id="other-box">
+      <ul id="other-list"></ul>
+      <input  id = "other" class="input"  type="text" name="">
+    </div>
+  </div>
+
+  <div class="footer">
+   <div>  
+     <a href="./day.html">今日计划</a> 
+   </div>
+   <div>
+     <a href="./week.html">完成状态</a> 
+   </div>
+   <div>
+     <a href="./mine.html">我的计划</a> 
+   </div>
+  </div>
+</body>
+
+<script src="./util/public.js"></script>
+<script type="text/javascript">
+ 
+  let array = ['work','health','relax','other'];
+  _util.initLoad(array);
+
+  for(let i = 0; i < array.length; i++){
+      let item = array[i];
+      let obj = document.getElementById(item);
+       _util.addBlur(obj,item)
+  }
+</script>
+
+</html>

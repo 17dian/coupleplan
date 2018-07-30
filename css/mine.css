@@ -1,0 +1,32 @@
+.status{
+    width: 100%;
+    background: #666;
+    color: #FFF;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+ }
+ .input{
+  border:1px solid  #666;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+ }
+
+ .delete{
+   color: red;
+ }
+ .list-item{
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   box-sizing: border-box;
+   padding: 0 10px;
+   border-top: 1px solid #999;
+ }
+ .list-title{
+  color: blue;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+ }
