@@ -6,27 +6,240 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,
   minimum-scale=1,user-scalable=no">
   <link rel="stylesheet" type="text/css" href="./base.css">
+  <link href="https://cdn.bootcss.com/Swiper/4.3.0/css/swiper.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/Swiper/4.3.0/js/swiper.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/mine.css">
+  <link rel="stylesheet" type="text/css" href="./css/day.css">
 </head>
+</script>
  <body>
-  <div class="test">
-  </div>
- 
-   <div> 任务1:0000</div>
-   <div> 任务2:0000</div>
-  
+  <div>
+    <div class="swiper-container swiper-container1">
+        <div class="swiper-wrapper" id="swiper-wrapper1">
+           <div class="swiper-slide">周计划</div> 
+           <div class="swiper-slide active-nav">周一</div>
+           <div class="swiper-slide">周二</div>
+           <div class="swiper-slide">周三</div>
+           <div class="swiper-slide">周四</div>
+           <div class="swiper-slide">周五</div> 
+           <div class="swiper-slide">周六</div>
+           <div class="swiper-slide">周日</div> 
+        </div>
+      </div>
+    </div>
+    <div class="swiper-container swiper-container2">
+      <div class="swiper-wrapper">
+         <div class="swiper-slide">
+            <div id = "weekPlan">周计划</div>
+            <ul id = "weekList">
+            </ul>
+            <div>
+              <div class="list-title">周一</div>
+              <div id="Monday-box">
+                 <ul id="Monday-list"></ul>
+                    <input id="Monday" class="input" type="text" name="">
+                 </div>
+            </div>
+            <div>
+              <div class="list-title">周二</div>
+              <div id="Tuesday-box">
+                 <ul id="Tuesday-list"></ul>
+                    <input id="Tuesday" class="input" type="text" name="">
+                 </div>
+            </div>
+            <div>
+              <div class="list-title">周三</div>
+              <div id="Wednesday-box">
+                 <ul id="Wednesday-list"></ul>
+                    <input id="Wednesday" class="input" type="text" name="">
+                 </div>
+            </div>
+            <div>
+              <div class="list-title">周四</div>
+              <div id="Thursday-box">
+                 <ul id="Thursday-list"></ul>
+                    <input id="Thursday" class="input" type="text" name="">
+                 </div>
+            </div>
+            <div>
+              <div class="list-title">周五</div>
+              <div id="Friday-box">
+                 <ul id="Friday-list"></ul>
+                    <input id="Friday" class="input" type="text" name="">
+                 </div>
+            </div>
+           <div>
+              <div class="list-title">周六</div>
+              <div id="Saturday-box">
+                 <ul id="Saturday-list"></ul>
+                    <input id="Saturday" class="input" type="text" name="">
+                 </div>
+            </div>
+            <div>
+              <div class="list-title">周日</div>
+              <div id="Sunday-box">
+                 <ul id="Sunday-list"></ul>
+                    <input id="Sunday" class="input" type="text" name="">
+                 </div>
+            </div>
+         </div>
 
-   <div>5:干什么</div>
-  
+         <div class="swiper-slide">
+           <div>周一任务</div>
+           <ul class="todaylist"></ul>  
+         </div>
+         <div class="swiper-slide">
+           <div>周二任务</div>
+           <ul class="todaylist"></ul>  
+         </div>
+         <div class="swiper-slide">
+           <div>周三任务</div>
+           <ul class="todaylist"></ul> 
+         </div>
+          <div class="swiper-slide">
+           <div>周四任务</div>
+           <ul class="todaylist"></ul>  
+         </div>
+         <div class="swiper-slide">
+           <div>周五任务</div>
+           <ul class="todaylist"></ul> 
+         </div>
+          <div class="swiper-slide">
+           <div>周六任务</div>
+           <ul class="todaylist"></ul>  
+         </div>
+         <div class="swiper-slide">
+           <div>周日任务</div>
+           <ul class="todaylist"></ul> 
+         </div>
+    </div>
+ </div>
+
   <div class="footer">
      <div>  
        <a href="./day.html">今日计划</a> 
-     </div>
-     <div>
-       <a href="./week.html">完成状态</a> 
      </div>
      <div>
        <a href="./mine.html">我的计划</a> 
      </div>
   </div>
  </body>
+ <script src="./util/public.js"></script>
+ <script type="text/javascript">
+   // *********Swiper***************
+
+  let day = _util.toDayWeek();
+  let weekday = day.weekday;
+
+   var mySwiper1 = new Swiper('.swiper-container1', {
+      initialSlide : weekday-1 ,
+      slidesPerView : 5,
+      watchSlidesProgress : true,
+      watchSlidesVisibility : true,
+      on: {
+       tap: function(e){
+          mySwiper2.slideTo( mySwiper1.clickedIndex)
+       }
+    }
+   })
+
+   var mySwiper2 = new Swiper('.swiper-container2', {
+      initialSlide :weekday,
+      on: {
+        slideChangeTransitionStart: function () {
+           updateNavPosition()
+        }
+     }
+   })
+
+   function updateNavPosition(){
+     if(mySwiper2 == undefined ) { mySwiper2 = {activeIndex : weekday}}
+     let item = document.querySelector('.active-nav');      
+     item.className =  item.className.replace('active-nav','');
+     let items = document.querySelectorAll('#swiper-wrapper1 > div');
+     items[mySwiper2.activeIndex].className = items[mySwiper2.activeIndex].className.concat(' active-nav');
+     mySwiper1.slideTo(mySwiper2.activeIndex-1)
+   }
+   // *********Swiper结束***************
+   // *********添加一周计划***************
+    let array = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']; 
+    
+     _util.initLoad(array);
+
+     array.map((item,index)=>{
+         addBlur(item);
+         addPageTask(item,index);
+     })
+
+     function addBlur(type){
+       let obj = document.getElementById(type);
+       obj.addEventListener('blur', function(){
+         if(obj.value == undefined || obj.value ==""){return null;}
+         let value  =  _util.getStorage(type);
+         let list = (value == null) ? {content : []} : value;
+         list.content.push(obj.value);
+          _util.setStorage(type,list);
+          array.map((item,index)=>{ addPageTask(item,index);})
+          _util.show(list.content,type);
+          obj.value = '';
+       })
+     }
+
+     function addPageTask(type,index){
+        let value  =  _util.getStorage(type);
+        if(value == undefined){return};
+        let content = value.content;
+        let html = "";
+        for(let i = 0; i < content.length; i++){
+           html +=  "<p><input type='checkbox' name='vehicle'/>"+ content[i]+"</p>";
+        }
+        let todatlist = document.getElementsByClassName("todaylist");
+        todatlist[index].innerHTML = html;
+  
+     }
+
+  // *********添加一周任务代码***************
+   
+ 
+  let Monday = _util.dateFormatting(day.Monday);
+  let Sunday = _util.dateFormatting(day.Sunday);
+  let weekTitle = "周计划："+Monday+"——" +Sunday;
+  let objWeek =  document.getElementById('weekPlan');
+  objWeek.innerHTML = weekTitle;
+   // 判断符合时间标准的任务
+  let taskType = ['work','health','relax','other'];
+  
+  taskType.map(function(item){
+    let typeName = item;
+    let type = _util.getStorage(item);
+    let content = type.content;
+
+    content.map(function(item){
+        let date =  _util.dateObject(item.date);
+        let date2 = _util.dateObject(item.date2);
+        let planStar = date.getTime();
+        let planEnd =  date2.getTime();
+        let weekStar = day.Monday.getTime();
+        let weekEnd  = day.Sunday.getTime();
+        if(planEnd > weekStar &&  planStar < weekEnd ){
+             addweekList(item,typeName)
+        }
+    })
+  })
+  
+  function addweekList(item,typeName){      
+     let obj = document.getElementById('weekPlan');
+     let newLi = document.createElement('li');
+     newLi.innerHTML = item.message+ " " + containDate(item.date)+"-"+containDate(item.date2) ;
+     newLi.className = typeName;
+     obj.appendChild(newLi)
+  
+  }
+
+  function containDate(date){
+    return date._year+"年"+date._month+"月"+date._day +"日"; 
+  }
+
+
+ </script>
 </html>

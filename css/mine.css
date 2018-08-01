@@ -1,10 +1,11 @@
 .status{
     width: 100%;
-    background: #666;
+    background: #3385ff;
     color: #FFF;
     text-align: center;
-    height: 80px;
-    line-height: 80px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
  }
  .input{
   border:1px solid  #666;

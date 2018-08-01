@@ -1,0 +1,28 @@
+  .title{
+    display: flex;
+    justify-content: space-around;
+    height: 40px;
+    line-height: 40px;
+  }
+  .date-table {
+    width: 100%;
+    border: 1px solid #666;
+  }
+  .date-table tr{
+    
+     width: 100%;
+  }
+  .date-table tr td {
+      text-align: center;
+   }
+   .date-select{
+    background: red;
+    color: #fff;
+   }
+   .express-day{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #999;
+    height: 50px;
+    line-height: 50px;
+   }

@@ -7,10 +7,23 @@
   minimum-scale=1,user-scalable=no">
   <link rel="stylesheet" type="text/css" href="./base.css">
   <link rel="stylesheet" type="text/css" href="./css/mine.css">
+  <link rel="stylesheet" type="text/css" href="./components/date/date.css">
 </head>
-
+<style type="text/css">
+  .date-components{
+    display:none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+  }
+  .show{
+   display:block;
+  }
+</style>
 <body>
-  <div class="status">Couple Plan</div>
+  <div class="status">Candy Plan</div>
   <div >
   <div class="list-title">工作学习</div>
     <div id="work-box">
@@ -44,25 +57,68 @@
      <a href="./day.html">今日计划</a> 
    </div>
    <div>
-     <a href="./week.html">完成状态</a> 
-   </div>
-   <div>
      <a href="./mine.html">我的计划</a> 
    </div>
   </div>
+  <!-- **********日期组件*************** -->
+  <div class="date-components" id="date-components">
+        <div class="express-day">
+            <div id = "starDay"></div>
+            <div id = "endDay"></div>
+        </div>
+        <div>
+            <div id = "selectStar">
+                <div class="title">
+                  <div id="preYear"> << </div>
+                  <div id="preMon"> < </div>
+                  <div id="month"></div>
+                  <div id="nextMon"> > </div>
+                  <div id="nextYear"> >> </div>
+                </div>
+                <table class="date-table" id = "table" cellpadding = 0; cellspacing=0; rules="all"> 
+                </table>
+            </div>
+            <div id = "selectEnd">
+                <div class="title">
+                  <div id="preYear2"> << </div>
+                  <div id="preMon2"> < </div>
+                  <div id="month2"></div>
+                  <div id="nextMon2"> > </div>
+                  <div id="nextYear2"> >> </div>
+                </div>
+                <table  class="date-table" id = "table2" cellpadding = 0; cellspacing=0; rules="all"> 
+                </table>
+            </div>
+        </div>
+        <div id = "confirmDate">确定</div>
+    </div>
 </body>
 
 <script src="./util/public.js"></script>
+<script src="./components/date/date.js"></script>
 <script type="text/javascript">
- 
+  let currentObj = {};
+  let currentType = "";
   let array = ['work','health','relax','other'];
   _util.initLoad(array);
 
   for(let i = 0; i < array.length; i++){
       let item = array[i];
       let obj = document.getElementById(item);
-       _util.addBlur(obj,item)
+       _util.addBlur(obj,item,'date-components');
   }
+
+  //给确认按钮添加事件
+   var confirmDate = document.getElementById("confirmDate");
+        confirmDate.addEventListener("click", function(){
+          let objDateName = document.getElementById("date-components");
+          objDateName.classList.remove("show");
+          _util.addItem(currentType,currentObj);
+          currentObj.value = "";
+   })
 </script>
+
+
+
 
 </html>

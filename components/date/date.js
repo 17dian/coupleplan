@@ -1,76 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,
-  minimum-scale=1,user-scalable=no">
-</head>
-<style type="text/css">
-  .title{
-    display: flex;
-    justify-content: space-around;
-    height: 40px;
-    line-height: 40px;
-  }
-  table {
-    width: 100%;
-    border: 1px solid #666;
-  }
-  table tr{
-    
-     width: 100%;
-  }
-  table tr td {
-      text-align: center;
-   }
-   .select{
-    background: red;
-    color: #fff;
-   }
-   .express-day{
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid #999;
-    height: 50px;
-    line-height: 50px;
-   }
-</style>
-<body>
-    <div>
-        <div class="express-day">
-            <div id = "starDay"></div>
-            <div id = "endDay"></div>
-        </div>
-        <div>
-            <div id = "selectStar">
-                <div class="title">
-                  <div id="preYear"> << </div>
-                  <div id="preMon"> < </div>
-                  <div id="month"></div>
-                  <div id="nextMon"> > </div>
-                  <div id="nextYear"> >> </div>
-                </div>
-                <table id = "table" cellpadding = 0; cellspacing=0; rules="all"> 
-                </table>
-            </div>
-            <div id = "selectEnd">
-                <div class="title">
-                  <div id="preYear2"> << </div>
-                  <div id="preMon2"> < </div>
-                  <div id="month2"></div>
-                  <div id="nextMon2"> > </div>
-                  <div id="nextYear2"> >> </div>
-                </div>
-                <table id = "table2" cellpadding = 0; cellspacing=0; rules="all"> 
-                </table>
-            </div>
-        </div>
-    </div>
-</body>
-<script type="text/javascript">
-
 
 let starDay = new Date();
 let endDay = new Date();
@@ -310,9 +237,7 @@ function renderDate(trArr,day,type){
       let template = "";
       for(let n = 0; n < 7; n++){
          if(trArr[i][n] == day){
-           template += "<td  class='select'>"+trArr[i][n]+"</td>"
-         }else if(trArr[i][n] > day){
-           template += "<td class='select2'>"+trArr[i][n]+"</td>"
+           template += "<td  class='date-select'>"+trArr[i][n]+"</td>"
          }else {
            template += "<td>"+trArr[i][n]+"</td>"
          }
@@ -323,7 +248,3 @@ function renderDate(trArr,day,type){
   }
   return html;
 }
-
-</script>
-
-</html>

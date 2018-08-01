@@ -1,0 +1,61 @@
+  .swiper-container2{
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    bottom: 50px;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  /* 布局结束 */
+  .swiper-container1{
+     height: 30px;
+     line-height: 30px;
+     text-align: center;
+     background: #3385ff;
+     color: #fff;
+     position: fixed;
+     top: 0;
+     z-index: 1000;
+  }
+  .swiper-container1 .active-nav{
+     color: red;
+     background: #fff;
+  }
+  .swiper-container1 .swiper-slide{
+    width: 50px;
+  }
+  
+  .swiper-container2 .swiper-slide{
+   /* background: #EEE;*/
+  }
+
+  #weekPlan{
+    font-size: 18px;
+    line-height: 1.5em;
+    text-align: left;
+    box-sizing: border-box;
+    padding-left: 10px;
+  }
+  #weekPlan li{
+    font-size: 14px;
+    line-height: 20px;
+  }
+  #weekPlan .work{
+    color: #000;
+  }
+  #weekPlan .health{
+    color: #333;
+  }
+  #weekPlan .relax{
+    color: #666;
+  }
+   #weekPlan .other{
+    color: #999;
+  }
+  .todaylist{
+    font-size: 18px;
+    line-height: 30px;
+    box-sizing: border-box;
+    padding-left: 20px;
+  }

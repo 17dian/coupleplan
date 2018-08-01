@@ -1,4 +1,21 @@
 var  _util = {
+  toDayWeek: function() {
+     let today = new Date();
+     let weekday = today.getDay();
+     let preN = weekday-1;
+     let NextN = 7 - weekday;
+     let preTime = today.getTime()- (24*60*60*1000) * preN;
+     let nextTime = today.getTime() + (24*60*60*1000)* NextN;
+     let Monday = new Date(preTime);
+     let Sunday = new Date(nextTime)
+      return { Monday, Sunday ,weekday}
+   },
+   dateObject : function(date){
+       return new Date(date._year,Number(date._month)-1,date._day)
+   },
+   dateFormatting : function (date){
+     return date.getFullYear()+ "年"+(date.getMonth()+1) + "月" + date.getDate()+"日";
+   },
    setStorage :function(item,data){
        let jsonData = JSON.stringify(data);
        localStorage.setItem(item,jsonData);
@@ -20,7 +37,16 @@ var  _util = {
       let html = "";
       if(list.length > 0){
         for (let i = 0; i < list.length; i++) {
-          html +=  "<li class = 'list-item'><span>" +  list[i] +  "</span> <span  class = 'delete' data-index = "+i+" data-item = "+item+"> X </span>" +   "</li>";
+          if(list[i].message == undefined){
+             html +=  "<li class = 'list-item'><span>" +list[i]+"</span> <span  class = 'delete' data-index = "+i+" data-item = "+item+"> X </span>" + "</li>";
+          }else {
+             html +=  "<li class = 'list-item'><span>" +list[i].message +" : "+  
+                    list[i].date._year +"."+ list[i].date._month + "."+
+                    list[i].date._day + " - "+ 
+                    list[i].date2._year +"."+ list[i].date2._month + "."+list[i].date2._day+''+
+                    "</span> <span  class = 'delete' data-index = "+i+" data-item = "+item+"> X </span>" +   "</li>";
+          }
+          
         }
       }
       return html;
@@ -50,17 +76,30 @@ var  _util = {
           }
       })
     },
-   addBlur :  function (obj,item){
-    obj.addEventListener('blur', function(){
-      if(obj.value == undefined || obj.value ==""){return null;}
-      
-
-      let value  =  _util.getStorage(item);
-      let list = (value == null) ? {content : []} : value;
-      list.content.push(obj.value);
-      _util.setStorage(item,list);
-      _util.show( list.content,item);
-      obj.value = "";
-    })
+    //向本地加一个数据
+    addItem:function(type,obj){
+      let item = {
+            date : date,
+            date2 : date2,
+            message:  obj.value
+          };
+         let value  =  _util.getStorage(type);
+          let list = (value == null) ? {content : []} : value;
+          list.content.push(item);
+          _util.setStorage(type,list);
+          _util.show(list.content,type);
+          
+    },
+    selectDate : function(dateName){
+        let objDateName = document.getElementById(dateName);
+        objDateName.classList.add("show");
+    },
+    addBlur :  function (obj,type,dateName){
+      obj.addEventListener('blur', function(){
+        if(obj.value == undefined || obj.value ==""){return null;}
+        _util.selectDate(dateName);
+        currentObj = obj;
+        currentType = type;
+      })
   }
 }
