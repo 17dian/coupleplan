@@ -4,22 +4,22 @@ let endDay = new Date();
 
 let type1 = {
     curTrArr :[],
-    preMon:"preMon",
-    nextMon:"nextMon",
-    preYear:"preYear",
-    nextYear:"nextYear",
-    objTable :"table",
-    objTitle:"month"
+    preMon:"cpdate-preMon",
+    nextMon:"cpdate-nextMon",
+    preYear:"cpdate-preYear",
+    nextYear:"cpdate-nextYear",
+    objTable :"cpdate-table",
+    objTitle:"cpdate-month"
 }
 
 let type2 = {
     curTrArr :[],
-    preMon:"preMon2",
-    nextMon:"nextMon2",
-    preYear:"preYear2",
-    nextYear:"nextYear2",
-    objTable :"table2",
-    objTitle:"month2"
+    preMon:"cpdate-preMon2",
+    nextMon:"cpdate-nextMon2",
+    preYear:"cpdate-preYear2",
+    nextYear:"cpdate-nextYear2",
+    objTable :"cpdate-table2",
+    objTitle:"cpdate-month2"
 }
 
 let date = {

@@ -1,3 +1,4 @@
+
 var  _util = {
   toDayWeek: function() {
      let today = new Date();
@@ -46,7 +47,6 @@ var  _util = {
                     list[i].date2._year +"."+ list[i].date2._month + "."+list[i].date2._day+''+
                     "</span> <span  class = 'delete' data-index = "+i+" data-item = "+item+"> X </span>" +   "</li>";
           }
-          
         }
       }
       return html;
@@ -76,30 +76,25 @@ var  _util = {
           }
       })
     },
-    //向本地加一个数据
-    addItem:function(type,obj){
-      let item = {
-            date : date,
-            date2 : date2,
-            message:  obj.value
-          };
-         let value  =  _util.getStorage(type);
-          let list = (value == null) ? {content : []} : value;
-          list.content.push(item);
-          _util.setStorage(type,list);
-          _util.show(list.content,type);
-          
+    //向本地添加一个数据
+    addItem:function(type,date){
+       let value  =  _util.getStorage(type);
+       let list = (value == null) ? {content : []} : value;
+       list.content.push(date);
+       _util.setStorage(type,list);
+       return list.content;
     },
-    selectDate : function(dateName){
-        let objDateName = document.getElementById(dateName);
-        objDateName.classList.add("show");
+    //添加数据并更新视图
+    upDateType:function(type,date){
+      let array =  _util.addItem(type,date);
+      _util.show(array,type);
     },
-    addBlur :  function (obj,type,dateName){
+    //添加失焦事件
+    addBlur :  function (type,fn){
+      let obj = document.getElementById(type);
       obj.addEventListener('blur', function(){
         if(obj.value == undefined || obj.value ==""){return null;}
-        _util.selectDate(dateName);
-        currentObj = obj;
-        currentType = type;
-      })
+        fn(obj,type)
+    })
   }
 }

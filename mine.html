@@ -10,17 +10,7 @@
   <link rel="stylesheet" type="text/css" href="./components/date/date.css">
 </head>
 <style type="text/css">
-  .date-components{
-    display:none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    background: #fff;
-  }
-  .show{
-   display:block;
-  }
+
 </style>
 <body>
   <div class="status">Candy Plan</div>
@@ -61,64 +51,46 @@
    </div>
   </div>
   <!-- **********日期组件*************** -->
-  <div class="date-components" id="date-components">
-        <div class="express-day">
-            <div id = "starDay"></div>
-            <div id = "endDay"></div>
-        </div>
-        <div>
-            <div id = "selectStar">
-                <div class="title">
-                  <div id="preYear"> << </div>
-                  <div id="preMon"> < </div>
-                  <div id="month"></div>
-                  <div id="nextMon"> > </div>
-                  <div id="nextYear"> >> </div>
-                </div>
-                <table class="date-table" id = "table" cellpadding = 0; cellspacing=0; rules="all"> 
-                </table>
-            </div>
-            <div id = "selectEnd">
-                <div class="title">
-                  <div id="preYear2"> << </div>
-                  <div id="preMon2"> < </div>
-                  <div id="month2"></div>
-                  <div id="nextMon2"> > </div>
-                  <div id="nextYear2"> >> </div>
-                </div>
-                <table  class="date-table" id = "table2" cellpadding = 0; cellspacing=0; rules="all"> 
-                </table>
-            </div>
-        </div>
-        <div id = "confirmDate">确定</div>
-    </div>
+  <div id = "newDate" ></div>
+
 </body>
 
 <script src="./util/public.js"></script>
-<script src="./components/date/date.js"></script>
+<!-- <script src="./components/date/date.js"></script> -->
+<script src="./components/date/newDate.js"></script>
 <script type="text/javascript">
-  let currentObj = {};
+  // let currentObj = {};
   let currentType = "";
+  let starday = {};
+  let endday  = {};
   let array = ['work','health','relax','other'];
   _util.initLoad(array);
 
-  for(let i = 0; i < array.length; i++){
-      let item = array[i];
-      let obj = document.getElementById(item);
-       _util.addBlur(obj,item,'date-components');
+  //注册日期组建
+  let  dateNew  =  new newDate('newDate');
+  dateNew.addConfirmEvent(getConfirmDate);
+
+  array.map((item)=>{
+     _util.addBlur(item,addBlurfn);
+  })
+
+  function addBlurfn(obj,type){
+    dateNew.show();
+    // currentObj = obj;
+    currentType = type;
   }
 
-  //给确认按钮添加事件
-   var confirmDate = document.getElementById("confirmDate");
-        confirmDate.addEventListener("click", function(){
-          let objDateName = document.getElementById("date-components");
-          objDateName.classList.remove("show");
-          _util.addItem(currentType,currentObj);
-          currentObj.value = "";
-   })
+  function getConfirmDate(){
+      let date = dateNew.getDate();
+      let obj = document.getElementById(currentType);
+      let item = {
+        date : date.date,
+        date2 : date.date2,
+        message:  obj.value
+      };
+      _util.upDateType(currentType,item);
+      obj.value = "";
+  }
+  
 </script>
-
-
-
-
 </html>

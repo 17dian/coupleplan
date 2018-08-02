@@ -125,7 +125,6 @@
  <script src="./util/public.js"></script>
  <script type="text/javascript">
    // *********Swiper***************
-
   let day = _util.toDayWeek();
   let weekday = day.weekday;
 
@@ -165,22 +164,14 @@
      _util.initLoad(array);
 
      array.map((item,index)=>{
-         addBlur(item);
+         _util.addBlur(item,addBlurfn);
          addPageTask(item,index);
      })
 
-     function addBlur(type){
-       let obj = document.getElementById(type);
-       obj.addEventListener('blur', function(){
-         if(obj.value == undefined || obj.value ==""){return null;}
-         let value  =  _util.getStorage(type);
-         let list = (value == null) ? {content : []} : value;
-         list.content.push(obj.value);
-          _util.setStorage(type,list);
-          array.map((item,index)=>{ addPageTask(item,index);})
-          _util.show(list.content,type);
-          obj.value = '';
-       })
+     function addBlurfn(obj,type){
+        _util.upDateType(type,obj.value)
+        array.map((item,index)=>{ addPageTask(item,index);})
+        obj.value = '';
      }
 
      function addPageTask(type,index){
@@ -193,11 +184,9 @@
         }
         let todatlist = document.getElementsByClassName("todaylist");
         todatlist[index].innerHTML = html;
-  
      }
 
   // *********添加一周任务代码***************
-   
   let Monday = _util.dateFormatting(day.Monday);
   let Sunday = _util.dateFormatting(day.Sunday);
   let weekTitle = "周计划："+Monday+"——" +Sunday;
@@ -223,6 +212,7 @@
         }
     })
   })
+  
   function addweekList(item,typeName){      
      let obj = document.getElementById('weekPlan');
      let newLi = document.createElement('li');
